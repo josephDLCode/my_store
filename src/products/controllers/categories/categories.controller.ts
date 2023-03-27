@@ -9,8 +9,11 @@ import {
   Put,
   Delete
 } from '@nestjs/common'
-import { CreateCategoryDto, UpdateCategoryDto } from 'src/dtos/categories.dtos'
-import { CategoriesService } from 'src/services/categories/categories.service'
+import {
+  CreateCategoryDto,
+  UpdateCategoryDto
+} from 'src/products/dtos/category.dto'
+import { CategoriesService } from 'src/products/services/categories/categories.service'
 
 @Controller('categories')
 export class CategoriesController {
@@ -45,6 +48,6 @@ export class CategoriesController {
 
   @Delete(':categoryId')
   deleteCategory(@Param('categoryId', ParseIntPipe) categoryId: number) {
-    this.categoriesService.remove(categoryId)
+    return this.categoriesService.remove(categoryId)
   }
 }
