@@ -9,3 +9,5 @@ Para hacer peticiones y usarlo dentro de la función asincrona en useFactory deb
 Aunque el useFactory puede ser usado para hacer peticiones a api's externas, no se aconseja usarlo para ese motivo, ya que el arranque del servidor dependera de que termine de resolverse esa petición por lo que puede tardar en ciertos casos. Para lo que si se aconseja el uso de useFactory es para conexiones a bases de datos ya que nos aseguramos de que la bd este conectada para arrancar el servidor.
 
 El decorador Global permite que un "module" sea llamado desde cualquier parte de la aplicación sin necesidad de importarlo.
+
+Para realizar validaciones a los esquemas en .env debemos instalar la librería Joi
