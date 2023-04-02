@@ -13,7 +13,7 @@ async function bootstrap() {
     })
   )
 
-  const config = new DocumentBuilder()
+  const config = new DocumentBuilder() // permite documentar la API
     .setTitle('NestJS API')
     .setDescription('The NestJS API description')
     .setVersion('1.0')
@@ -22,6 +22,8 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config)
   SwaggerModule.setup('docs', app, document)
 
-  await app.listen(3000)
+  app.enableCors() // permite el acceso a la API desde cualquier origen
+
+  await app.listen(process.env.PORT || 3000)
 }
 bootstrap()
