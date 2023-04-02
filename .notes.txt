@@ -11,3 +11,9 @@ Aunque el useFactory puede ser usado para hacer peticiones a api's externas, no 
 El decorador Global permite que un "module" sea llamado desde cualquier parte de la aplicación sin necesidad de importarlo.
 
 Para realizar validaciones a los esquemas en .env debemos instalar la librería Joi
+
+Para realizar la documentación de nuestras API REST debemos instalar "@nestjs/swagger swagger-ui-express".
+
+Para que swagger pueda identificar los dto's se necesita habilitar dentro de los plugins de nest-cli.json: "plugins": ["@nestjs/swagger"]
+
+Además se debe usar el PartialType de la libreria "@nestjs/swagger" y precindir de "@nestjs/mapped-types". Esto se hace siempre y cuando se necesite documentar con swagger
