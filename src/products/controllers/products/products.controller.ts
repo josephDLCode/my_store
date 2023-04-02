@@ -1,3 +1,4 @@
+import { ApiOperation, ApiTags } from '@nestjs/swagger'
 import {
   Controller,
   Get,
@@ -17,11 +18,13 @@ import { ProductsService } from '../../services/products/products.service'
 import { ParseIntPipe } from '../../../common/parse-int/parse-int.pipe'
 import { CreateProductDto, UpdateProductDto } from '../../dtos/product.dto'
 
+@ApiTags('products')
 @Controller('products')
 export class ProductsController {
   constructor(private productsService: ProductsService) {}
 
   @Get()
+  @ApiOperation({ summary: 'List of products' })
   getProducts(
     @Query('limit') limit = 200,
     @Query('offset') offset = 0,

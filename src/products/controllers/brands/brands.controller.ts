@@ -1,3 +1,4 @@
+import { ApiTags } from '@nestjs/swagger'
 import {
   Controller,
   Get,
@@ -12,6 +13,7 @@ import {
 import { BrandsService } from '../../services/brands/brands.service'
 import { CreateBrandDto, UpdateBrandDto } from '../../dtos/brand.dto'
 
+@ApiTags('brands')
 @Controller('brands')
 export class BrandsController {
   constructor(private brandsService: BrandsService) {}
