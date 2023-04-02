@@ -1,0 +1,9 @@
+- useValue: Valores definidos como una API_KEY. Puede ser un string, number, objeto, arreglo, etc.
+
+- useClass: Se le pasa una instacia de una clase; como por ejemplo un Service.
+
+- useFactory: Su mismo nombre lo define, ya que permite realizar llamadas a otro servicio. Se le pasa una función asincrona.
+
+Para hacer peticiones y usarlo dentro de la función asincrona en useFactory debemos instalar la dependencia de "@nestjs/axios axios", esto es si usamos una versión de nestjs superior a la 7. Para versiones menores a la 7 se puede usar HttpService y HttpModule desde @nestjs/common.
+
+Aunque el useFactory puede ser usado para hacer peticiones a api's externas, no se aconseja usarlo para ese motivo, ya que el arranque del servidor dependera de que termine de resolverse esa petición por lo que puede tardar en ciertos casos. Para lo que si se aconseja el uso de useFactory es para conexiones a bases de datos ya que nos aseguramos de que la bd este conectada para arrancar el servidor.
