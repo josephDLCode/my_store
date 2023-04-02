@@ -8,12 +8,14 @@ import { AppController } from './app.controller'
 import { UsersModule } from './users/users.module'
 import { ProductsModule } from './products/products.module'
 import { DatabaseModule } from './database/database.module'
-import { environments } from 'environments'
+import { environments } from 'src/environments'
+import config from './config'
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       envFilePath: environments[process.env.NODE_ENV] || '.env',
+      load: [config],
       isGlobal: true
     }),
     HttpModule,
