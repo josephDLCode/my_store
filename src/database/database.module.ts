@@ -1,6 +1,7 @@
 import { MongoClient } from 'mongodb'
-import { Module, Global } from '@nestjs/common'
 import { ConfigType } from '@nestjs/config'
+import { MongooseModule } from '@nestjs/mongoose'
+import { Module, Global } from '@nestjs/common'
 
 import config from '../config'
 
@@ -9,6 +10,21 @@ const API_KEY_PROD = 'PROD_123456789'
 
 @Global()
 @Module({
+  imports: [
+    MongooseModule.forRootAsync({
+      useFactory: async (configService: ConfigType<typeof config>) => {
+        const { password, host, username, port, name } = configService.database
+        const uri = `mongodb://${username}:${password}@${host}:${port}/?authSource=admin&readPreference=primary`
+        return {
+          uri,
+          user: username,
+          pass: password,
+          dbName: name
+        }
+      },
+      inject: [config.KEY]
+    })
+  ],
   providers: [
     {
       provide: 'API_KEY',

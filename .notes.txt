@@ -17,3 +17,5 @@ Para realizar la documentación de nuestras API REST debemos instalar "@nestjs/s
 Para que swagger pueda identificar los dto's se necesita habilitar dentro de los plugins de nest-cli.json: "plugins": ["@nestjs/swagger"]
 
 Además se debe usar el PartialType de la libreria "@nestjs/swagger" y precindir de "@nestjs/mapped-types". Esto se hace siempre y cuando se necesite documentar con swagger
+
+Para usar mongoose se debe instalar el paquete oficial de mongoose al cual nestjs da soporte "@nestjs/mongoose mongoose"
