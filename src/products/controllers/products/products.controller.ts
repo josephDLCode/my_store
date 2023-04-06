@@ -17,6 +17,7 @@ import {
 import { ProductsService } from '../../services/products/products.service'
 import { ParseIntPipe } from '../../../common/parse-int/parse-int.pipe'
 import { CreateProductDto, UpdateProductDto } from '../../dtos/product.dto'
+import { MongoIdPipe } from 'src/common/mongo-id/mongo-id.pipe'
 
 @ApiTags('products')
 @Controller('products')
@@ -35,7 +36,7 @@ export class ProductsController {
   }
 
   @Get(':productId')
-  getProduct(@Param('productId') productId: string) {
+  getProduct(@Param('productId', MongoIdPipe) productId: string) {
     return this.productsService.findOne(productId)
   }
 
@@ -47,14 +48,14 @@ export class ProductsController {
   @Put(':productId')
   @HttpCode(HttpStatus.ACCEPTED)
   update(
-    @Param('productId') productId: string,
+    @Param('productId', MongoIdPipe) productId: string,
     @Body() payload: UpdateProductDto
   ) {
     return this.productsService.update(productId, payload)
   }
 
   @Delete(':productId')
-  delete(@Param('productId') productId: string) {
+  delete(@Param('productId', MongoIdPipe) productId: string) {
     return this.productsService.remove(productId)
   }
 }
