@@ -9,7 +9,10 @@ async function bootstrap() {
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true, // elimina atributos no establecidos en los dto
-      forbidNonWhitelisted: true // alerta sobre los parametros no establecidos en los dto
+      forbidNonWhitelisted: true, // alerta sobre los parametros no establecidos en los dto
+      transformOptions: {
+        enableImplicitConversion: true // permite convertir los parametros de la url
+      }
     })
   )
 
