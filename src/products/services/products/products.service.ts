@@ -1,31 +1,27 @@
+import { Model } from 'mongoose'
+import { InjectModel } from '@nestjs/mongoose'
 import { Injectable, NotFoundException } from '@nestjs/common'
+
 import { Product } from '../../entities/product.entity'
 import { CreateProductDto, UpdateProductDto } from '../../dtos/product.dto'
 
 @Injectable()
 export class ProductsService {
-  private products: Product[] = [
-    {
-      id: 1,
-      name: 'Product 1',
-      description: 'bla bla',
-      price: 12,
-      image: '',
-      stock: 12
-    }
-  ]
+  constructor(
+    @InjectModel(Product.name) private productModel: Model<Product>
+  ) {}
 
   findAll() {
-    return this.products
+    return this.productModel.find().exec()
   }
 
-  findOne(id: number) {
-    const product = this.products.find((product) => product.id === id)
+  async findOne(id: string) {
+    const product = await this.productModel.findById(id).exec()
     if (!product) throw new NotFoundException(`Product #${id} not found`)
     return product
   }
 
-  create(payload: CreateProductDto) {
+  /* create(payload: CreateProductDto) {
     const newProduct = { ...payload, id: this.products.length + 1 }
     this.products.push(newProduct)
     return newProduct
@@ -48,5 +44,5 @@ export class ProductsService {
     const deletedProduct = this.products[index]
     this.products.splice(index, 1)
     return deletedProduct
-  }
+  } */
 }
