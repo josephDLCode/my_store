@@ -21,28 +21,21 @@ export class ProductsService {
     return product
   }
 
-  /* create(payload: CreateProductDto) {
-    const newProduct = { ...payload, id: this.products.length + 1 }
-    this.products.push(newProduct)
-    return newProduct
+  create(payload: CreateProductDto) {
+    const newProduct = new this.productModel(payload)
+    return newProduct.save()
   }
 
-  update(id: number, payload: UpdateProductDto) {
-    const product = this.findOne(id)
-    if (product) {
-      const index = this.products.findIndex((product) => product.id === id)
-      this.products.splice(index, 1, { ...product, ...payload })
-      return product
-    }
+  update(id: string, payload: UpdateProductDto) {
+    const product = this.productModel
+      .findByIdAndUpdate(id, { $set: payload }, { new: true })
+      .exec()
+    if (!product) throw new NotFoundException(`Product #${id} not found`)
 
-    return null
+    return product
   }
 
-  remove(id: number) {
-    const product = this.findOne(id)
-    const index = this.products.findIndex((product) => product.id === id)
-    const deletedProduct = this.products[index]
-    this.products.splice(index, 1)
-    return deletedProduct
-  } */
+  remove(id: string) {
+    return this.productModel.findByIdAndDelete(id)
+  }
 }

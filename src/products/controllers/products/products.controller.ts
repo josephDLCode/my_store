@@ -39,7 +39,7 @@ export class ProductsController {
     return this.productsService.findOne(productId)
   }
 
-  /* @Post()
+  @Post()
   create(@Body() payload: CreateProductDto) {
     return this.productsService.create(payload)
   }
@@ -47,14 +47,14 @@ export class ProductsController {
   @Put(':productId')
   @HttpCode(HttpStatus.ACCEPTED)
   update(
-    @Param('productId', ParseIntPipe) productId: number,
+    @Param('productId') productId: string,
     @Body() payload: UpdateProductDto
   ) {
     return this.productsService.update(productId, payload)
   }
 
   @Delete(':productId')
-  delete(@Param('productId', ParseIntPipe) productId: number) {
+  delete(@Param('productId') productId: string) {
     return this.productsService.remove(productId)
-  } */
+  }
 }
