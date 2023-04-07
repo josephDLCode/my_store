@@ -6,9 +6,11 @@ import {
   IsPositive,
   IsOptional,
   Min,
-  ValidateIf
+  ValidateIf,
+  ValidateNested
 } from 'class-validator'
 import { PartialType } from '@nestjs/swagger'
+import { CreateCategoryDto } from './category.dto'
 
 export class CreateProductDto {
   @IsString()
@@ -32,6 +34,10 @@ export class CreateProductDto {
   @IsUrl()
   @IsNotEmpty()
   readonly image: string
+
+  @IsNotEmpty()
+  @ValidateNested() // valida los campos de un objeto en cascada
+  readonly category: CreateCategoryDto
 }
 
 export class UpdateProductDto extends PartialType(CreateProductDto) {}
