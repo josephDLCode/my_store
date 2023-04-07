@@ -43,6 +43,6 @@ const API_KEY_PROD = 'PROD_123456789'
       inject: [config.KEY]
     }
   ],
-  exports: ['API_KEY', 'MONGO']
+  exports: ['API_KEY', 'MONGO', MongooseModule]
 })
 export class DatabaseModule {}

@@ -11,6 +11,7 @@ import {
 
 import { CustomersService } from '../../services/customers/customers.service'
 import { CreateCustomerDto, UpdateCustomerDto } from '../../dtos/customer.dto'
+import { MongoIdPipe } from 'src/common/mongo-id/mongo-id.pipe'
 
 @Controller('customers')
 export class CustomersController {
@@ -22,7 +23,7 @@ export class CustomersController {
   }
 
   @Get(':id')
-  get(@Param('id', ParseIntPipe) id: number) {
+  get(@Param('id', MongoIdPipe) id: string) {
     return this.customersService.findOne(id)
   }
 
@@ -33,14 +34,14 @@ export class CustomersController {
 
   @Put(':id')
   update(
-    @Param('id', ParseIntPipe) id: number,
+    @Param('id', MongoIdPipe) id: string,
     @Body() payload: UpdateCustomerDto
   ) {
     return this.customersService.update(id, payload)
   }
 
   @Delete(':id')
-  remove(@Param('id', ParseIntPipe) id: number) {
-    return this.customersService.remove(+id)
+  remove(@Param('id', MongoIdPipe) id: string) {
+    return this.customersService.remove(id)
   }
 }
