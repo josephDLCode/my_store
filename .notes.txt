@@ -19,3 +19,11 @@ Para que swagger pueda identificar los dto's se necesita habilitar dentro de los
 Además se debe usar el PartialType de la libreria "@nestjs/swagger" y precindir de "@nestjs/mapped-types". Esto se hace siempre y cuando se necesite documentar con swagger
 
 Para usar mongoose se debe instalar el paquete oficial de mongoose al cual nestjs da soporte "@nestjs/mongoose mongoose"
+
+Las relaciones 1 a 1 embebidas tienen un objeto de un modelo diferente que esta anexado al objeto principal que se esta enviando.
+
+Las relaciones 1 a 1 referenciadas son relacionados a traves de el id del modelo con el que estamos queriendo relacionar.
+
+Las relaciones 1 * m embebidas tienen un array de objetos de un modelo diferente que esta anexado al objeto principal que se esta enviando.
+
+Las relaciones 1 * m referenciadas son relacionados a traves de un array de id´s
