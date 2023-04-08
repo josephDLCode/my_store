@@ -31,7 +31,7 @@ export class Product extends Document {
   category: Record<string, any>
 
   @Prop({ type: Types.ObjectId, ref: Brand.name })
-  brand: Brand | Types.ObjectId
+  brand: Brand | Types.ObjectId // 1:1
 
   @Prop({ type: SubDocSchema })
   subDoc: SubDoc // 👈 new field (1:1)
