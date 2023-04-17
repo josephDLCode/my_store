@@ -9,5 +9,6 @@ export default registerAs('database', () => ({
     username: process.env.DATABASE_USERNAME,
     password: process.env.DATABASE_PASSWORD
   },
-  apiKey: process.env.API_KEY
+  apiKey: process.env.API_KEY,
+  jwtSecret: process.env.JWT_SECRET
 }))
