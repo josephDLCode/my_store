@@ -23,20 +23,24 @@ import {
   FilterProductDto
 } from '../../dtos/product.dto'
 import { MongoIdPipe } from 'src/common/mongo-id/mongo-id.pipe'
-import { AuthGuard } from '@nestjs/passport'
 
-@UseGuards(AuthGuard('jwt'))
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard'
+import { Public } from 'src/auth/decorators/public.decorator'
+
+@UseGuards(JwtAuthGuard)
 @ApiTags('products')
 @Controller('products')
 export class ProductsController {
   constructor(private productsService: ProductsService) {}
 
+  @Public()
   @Get()
   @ApiOperation({ summary: 'List of products' })
   getProducts(@Query() params: FilterProductDto) {
     return this.productsService.findAll(params)
   }
 
+  @Public()
   @Get(':productId')
   getProduct(@Param('productId', MongoIdPipe) productId: string) {
     return this.productsService.findOne(productId)
