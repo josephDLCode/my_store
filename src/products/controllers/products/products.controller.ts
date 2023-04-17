@@ -26,8 +26,11 @@ import { MongoIdPipe } from 'src/common/mongo-id/mongo-id.pipe'
 
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard'
 import { Public } from 'src/auth/decorators/public.decorator'
+import { Roles } from 'src/auth/decorators/roles.decorator'
+import { Role } from 'src/auth/models/roles.model'
+import { RolesGuard } from 'src/auth/guards/roles.guard'
 
-@UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard, RolesGuard) // poner en order de validación
 @ApiTags('products')
 @Controller('products')
 export class ProductsController {
@@ -46,6 +49,7 @@ export class ProductsController {
     return this.productsService.findOne(productId)
   }
 
+  @Roles(Role.ADMIN)
   @Post()
   create(@Body() payload: CreateProductDto) {
     return this.productsService.create(payload)
